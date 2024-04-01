@@ -15,12 +15,15 @@ if ($pass != $rePass) {
     echo "Welcome here";
 }
 
-switch ($name) {
-    case "Red":
-        echo "red";
+switch ($color) {
+    case "red":
+        echo "you have choosed red";
         break;
-    case "Blue":
-        echo "blue";
+    case "blue":
+        echo "You have choosed blue";
+        break;
+    case "yellow":
+        echo "You have choosed yellow";
         break;
 }
 
@@ -60,6 +63,12 @@ switch ($name) {
                 <td>Program</td>
                 <td>
                     <?php echo $program ?>
+                </td>
+            </tr>
+            <tr>
+                <td>Favourite color</td>
+                <td>
+                    <?php echo $color ?>
                 </td>
             </tr>
         </table>
