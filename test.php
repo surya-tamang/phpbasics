@@ -1,10 +1,6 @@
 <?php
-$error = $_GET["message"];
-
-if ($error == "error") {
-   
-    $error= "Password not macthed !!";
-}
+session_start();
+$empty = $_GET["field"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,43 +10,63 @@ if ($error == "error") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        form input {
-            margin: 10px 0;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: black;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            background-color: crimson;
+            padding: 20px;
+            border-radius: 14px;
+            gap: 20px;
+        }
+
+        form input,
         button {
-            margin-top: 50px;
+            padding: 8px 15px;
+            border-radius: 8px;
+            border: none;
+        }
+
+        form button:hover {
+            background-color: blue;
+            color: #fff;
         }
     </style>
 </head>
 
 <body>
-
-    <div><?php echo $error; ?></div>
-    <form action="result.php" method="POST">
-        <input type="text" name="name" placeholder="enter your name">
-        <br>
-        <input type="email" name="email" placeholder="Your email">
-        <br>
-        <input type="password" name="password" placeholder="Password">
-        <br>
-        <input type="password" name="re-password" placeholder="Re-type Password">
-        <br>
-        <Label>Program</Label>
-        <select name="program" id="program">
-            <option value="BCA">BCA</option>
-            <option value="CSIT">CSIT</option>
-        </select>
-        <br>
-        <label for="favColor">Favourite color</label>
-        <input type="radio" name="color" value="red"><label for="red">RED</label>&nbsp;
-        <input type="radio" name="color" value="blue"><label for="blue">BLUE</label>&nbsp;
-        <input type="radio" name="color" value="yellow"><label for="yellow">YELLOW</label>&nbsp;
-        <br>
-        <button type="submit">Submit</button>
-        <button type="reset">Reset</button>
-    </form>
-
+    <div class="container">
+        <form action="formresult.php" method="POST">
+            <div class="emptyField">
+                <?php
+                if ($empty == "empty field") {
+                    echo "Please enter the details !!";
+                } ?>
+            </div>
+            <input type="text" name="name" placeholder="Enter your name">
+            <input type="email" name="email" placeholder="Enter your email">
+            <input type="password" name="pass" id="pass" placeholder="Enter password">
+            <input type="password" name="rePass" placeholder="Re-enter your password">
+            <div class="btn">
+                <button type="submit">Submit</button>
+                <button type="reset">Reset</button>
+            </div>
+        </form>
+    </div>
 </body>
 
 </html>

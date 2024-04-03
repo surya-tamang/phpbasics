@@ -1,32 +1,30 @@
+
 <?php
+session_start();
+
+setcookie("name","ram", time()+6000);
+
+
 
 $name = $_POST["name"];
 $email = $_POST["email"];
-$pass = $_POST["password"];
-$rePass = $_POST["re-password"];
-$program = $_POST["program"];
+$pass = $_POST["pass"];
+$rePass = $_POST["rePass"];
 
-$color = $_POST["color"];
+$_SESSION["name"]= $name;
+$_SESSION["email"]= $email;
+$_SESSION["pass"]= $pass;
+$_SESSION["rePass"]= $rePass;
 
-if ($pass != $rePass) {
-    echo "password not macthed";
-    header("location: http://127.0.0.1/test.php?message=error");
+
+
+if (empty($email) || empty($pass) || empty($rePass)) {
+    header("location:form.php?field=empty field");
 } else {
-    echo "Welcome here";
+    $succcesMsg = "Welcome back!! ". $name;
 }
 
-switch ($color) {
-    case "red":
-        echo "you have choosed red";
-        break;
-    case "blue":
-        echo "You have choosed blue";
-        break;
-    case "yellow":
-        echo "You have choosed yellow";
-        break;
-}
-
+echo session_id();
 ?>
 
 <!DOCTYPE html>
@@ -36,42 +34,53 @@ switch ($color) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+
+        fieldset{
+            margin-top: 130px;
+            height: 50vh;
+            padding: 20px;
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
-        <table>
-            <tr>
-                <td>Name</td>
-                <td>
-                    <?php echo $name ?>
-                </td>
-            </tr>
-            <tr>
-                <td>Email</td>
-                <td>
-                    <?php echo $email ?>
-                </td>
-            </tr>
-            <tr>
-                <td>Password</td>
-                <td>
-                    <?php echo $pass ?>
-                </td>
-            </tr>
-            <tr>
-                <td>Program</td>
-                <td>
-                    <?php echo $program ?>
-                </td>
-            </tr>
-            <tr>
-                <td>Favourite color</td>
-                <td>
-                    <?php echo $color ?>
-                </td>
-            </tr>
-        </table>
+        <fieldset>
+            <legend>
+                <?php echo $succcesMsg; ?>
+            </legend>
+            <table cellspacing="5px">
+                <tr>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Re-Password</th>
+                </tr>
+                <tr>
+                    <td>
+                        <?php echo $email ?>
+                    </td>
+                    <td>
+                        <?php echo $pass ?>
+                    </td>
+                    <td>
+                        <?php echo $rePass ?>
+                    </td>
+                    
+                </tr>
+            </table>
+        </fieldset>
     </div>
 </body>
 
