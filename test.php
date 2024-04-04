@@ -1,6 +1,43 @@
 <?php
 session_start();
 $empty = $_GET["field"];
+
+$pass = $_POST["pass"];
+$rePass = $_POST["rePass"];
+
+if ($pass != $rePass) {
+    die("Password doesn't match");
+}
+
+// var_dump($_SESSION);
+print_r($_SESSION);
+
+
+/*  
+<?php
+function checkEven($num){
+    try{
+    if($num%2==1){
+        throw new Exception("Number is odd ");
+      }
+    }
+    
+    catch(Exception $e){
+    echo "Exception message is: ",$e->getMessage();
+    }
+    
+    finally{
+    echo "This is a final block";
+    }
+
+}
+
+checkEven(1);
+
+
+?>
+*/
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,10 +88,11 @@ $empty = $_GET["field"];
 <body>
     <div class="container">
         <form action="formresult.php" method="POST">
-            <div class="emptyField">
+            <div class="emptyField" style="color: blue;">
                 <?php
                 if ($empty == "empty field") {
                     echo "Please enter the details !!";
+                    echo "<h4>Password haal</h4>";
                 } ?>
             </div>
             <input type="text" name="name" placeholder="Enter your name">
@@ -65,6 +103,10 @@ $empty = $_GET["field"];
                 <button type="submit">Submit</button>
                 <button type="reset">Reset</button>
             </div>
+
+            <?php
+            echo "<div class='fromphp'>" . $name . "</div>";
+            ?>
         </form>
     </div>
 </body>

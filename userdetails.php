@@ -8,6 +8,8 @@ setcookie("name","shyam");
 echo $_COOKIE["name"];
 echo $_SESSION["email"];
 echo $_SESSION["rePass"];
+unset($_SESSION["rePass"]);
+echo $_SESSION["rePass"];
 
 ?>
 
