@@ -1,7 +1,8 @@
 <?php
+
 session_start();
 $fname = $_POST["fname"];
-$lname = $_POST["lname"];
+$lname = $_REQUEST["lname"];
 
 $email = $_POST["email"];
 $gender = $_POST["gender"];
@@ -83,36 +84,36 @@ if (!$conn) {
 // mysqli_query($conn, $query);
 
 
-// $authenticate = "SELECT *FROM user_details WHERE email=" . $email . " AND pwd=" . $pass . "";
+// $authenticate = "SELECT *FROM user_details WHERE email='" . $email . "' AND pwd='" . $pass ."'";
+
 $authenticate = "SELECT * FROM user_details WHERE email='$email' AND pwd='$pass'";
 $result = mysqli_query($conn, $authenticate);
 
-// if (mysqli_num_rows($result) > 0) {
-//     while ($row = mysqli_fetch_assoc($result)) {
-//         echo $row["fname"] . " " . $row["lname"];
-//         echo $row["gender"];
-//     }
-// }
-
-
-if (!$result) {
-    // Query execution failed
-    echo "Error: " . mysqli_error($conn);
-} else {
-    // Query executed successfully
-    if (mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo $row["fname"] . " " . $row["lname"];
-            echo $row["gender"];
-        }
-    } else {
-        // No matching records found
-        echo "No user found with this email and password.";
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo $row["fname"] . " " . $row["lname"];
+        echo $row["gender"];
     }
 }
 
 
+// if (!$result) {
+//     // Query execution failed
+//     echo "Error: " . mysqli_error($conn);
+// } else {
+//     // Query executed successfully
+//     if (mysqli_num_rows($result) > 0) {
+//         while ($row = mysqli_fetch_assoc($result)) {
+//             echo $row["fname"] . " " . $row["lname"];
+//             echo $row["gender"];
+//         }
+//     } else {
+//         // No matching records found
+//         echo "No user found with this email and password.";
+//     }
+// }
 
+mysqli_close($conn);
 
 $query1 = "UPDATE user_details set fieldname='value' WHERE ID=1";
 
